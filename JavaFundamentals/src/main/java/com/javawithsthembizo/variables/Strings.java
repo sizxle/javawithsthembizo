@@ -1,4 +1,4 @@
-package com.javawithsthembizo;
+package com.javawithsthembizo.variables;
 
 public class Strings {
 

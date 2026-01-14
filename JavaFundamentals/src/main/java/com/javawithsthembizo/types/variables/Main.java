@@ -1,4 +1,4 @@
-package com.javawithsthembizo.variables;
+package com.javawithsthembizo.types.variables;
 
 public class Main {
 

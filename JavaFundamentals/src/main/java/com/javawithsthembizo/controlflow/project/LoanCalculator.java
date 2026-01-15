@@ -9,34 +9,39 @@ public class LoanCalculator {
 
         final byte MONTHS_IN_A_YEAR=12;
         final byte PERCENT=100;
-
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Principle (R1k-R1M :");
-        double principle=scanner.nextDouble();
-        while(principle<1000 || principle>1_000_000){
-            System.out.println("Enter a number between R1000 and R1 000 000.");
+
+        double principle=0;
+        float annualInterestRate= 0;
+        short years = 0;
+
+        do{
             System.out.print("Principle (R1k-R1M):");
             principle = scanner.nextDouble();
-        }
+            if(principle>=1000 && principle<=1_000_000) {
+                break;
+            }
+            System.out.println("Enter a number between R1000 and R1 000 000.");
+        }while(true);
 
-        System.out.print("Annual Interest Rate :");
-        float annualInterestRate= scanner.nextFloat();
-        while(annualInterestRate<=0 || annualInterestRate>30){
-            System.out.println("Enter a value grater than 0 and less than or equals to 30.");
+        do{
             System.out.print("Annual Interest Rate :");
             annualInterestRate = scanner.nextFloat();
-        }
+            if(annualInterestRate>0 && annualInterestRate<=30) {
+                break;
+            }
+            System.out.println("Enter a value grater than 0 and less than or equals to 30.");
+        }while (true);
 
 
-        System.out.print("Period (Years) :");
-        short years = scanner.nextShort();
-        while (years<1 || years>30){
-            System.out.println("Enter a value between 1 and 30");
+        do{
             System.out.print("Period (Years) :");
             years = scanner.nextShort();
-        }
 
-
+            if(years>0 && years<=30)
+                break;
+            System.out.println("Enter a value between 1 and 30");
+        }while (true);
 
         short numberOfRepayments= (short)(years*MONTHS_IN_A_YEAR);
         float monthlyInterest= annualInterestRate/PERCENT/MONTHS_IN_A_YEAR;

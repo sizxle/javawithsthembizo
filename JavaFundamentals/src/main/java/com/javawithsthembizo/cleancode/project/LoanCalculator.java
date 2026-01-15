@@ -17,6 +17,14 @@ public class LoanCalculator {
         statement(principle,years,annualInterestRate);
     }
 
+    public static double calculateBalance(double principle, short years,float annualInterestRate, int numberOfPaymentsMade){
+        short numberOfRepayments= (short)(years*MONTHS_IN_A_YEAR);
+        float monthlyInterest= annualInterestRate/PERCENT/MONTHS_IN_A_YEAR;
+        double futureValueFactor= Math.pow(1+monthlyInterest,numberOfRepayments);
+
+        return principle*(futureValueFactor- Math.pow(1+monthlyInterest,numberOfPaymentsMade))/(futureValueFactor-1);
+    }
+
     public static void statement(double principle, short years,float annualInterestRate){
 
         NumberFormat currency = NumberFormat.getCurrencyInstance();
@@ -25,17 +33,13 @@ public class LoanCalculator {
         System.out.println("LOAN CALCULATOR");
         System.out.println("_______________");
         System.out.println("Repayment: "+ currency.format(repayment));
-        System.out.println("\n");
+        System.out.println();
         System.out.println("PAYMENT SCHEDULE");
         System.out.println("________________");
 
-        short numberOfRepayments= (short)(years*MONTHS_IN_A_YEAR);
-        float monthlyInterest= annualInterestRate/PERCENT/MONTHS_IN_A_YEAR;
-
-        double futureValueFactor= Math.pow(1+monthlyInterest,numberOfRepayments);
-        for (int numOfPayment = 1; numOfPayment <=numberOfRepayments; numOfPayment++) {
-            double remainder= principle*(futureValueFactor- Math.pow(1+monthlyInterest,numOfPayment))/(futureValueFactor-1);
-            System.out.println(currency.format(remainder));
+        for (int month = 1; month <=years*MONTHS_IN_A_YEAR; month++) {
+            double balance =calculateBalance(principle,years,annualInterestRate,month);
+            System.out.println(currency.format(balance));
         }
 
     }

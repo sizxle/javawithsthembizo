@@ -5,10 +5,13 @@ public class Employee {
     private int baseSalary;
     private int hourlyRate;
 
+    public static int numOfEmployees;
+
 
     public Employee(int baseSalary, int hourlyRate){
         setBaseSalary(baseSalary);
         setHourlyRate(hourlyRate);
+        numOfEmployees++;
     }
 
     public Employee(int baseSalary){
@@ -35,7 +38,7 @@ public class Employee {
     }
 
     private void setHourlyRate(int hourlyRate){
-        if(hourlyRate<=0){
+        if(hourlyRate<0){
             throw new IllegalArgumentException("Hourly rate cannot be 0 or less");
         }
         this.hourlyRate=hourlyRate;
@@ -43,6 +46,10 @@ public class Employee {
 
     private int getHourlyRate(){
         return this.hourlyRate;
+    }
+
+    public static void printNumberOfEmployee(){
+        System.out.println(numOfEmployees);
     }
 
 

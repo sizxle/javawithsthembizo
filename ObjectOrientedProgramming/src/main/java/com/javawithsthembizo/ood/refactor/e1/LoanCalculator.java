@@ -9,7 +9,7 @@ public class LoanCalculator {
     private short years;
     private float annualInterestRate;
 
-    private final static byte MONTHS_IN_A_YEAR = 12;
+    public final static byte MONTHS_IN_A_YEAR = 12;
     private final static byte PERCENT = 100;
 
     public LoanCalculator(double principle, short years, float annualInterestRate) {
@@ -50,6 +50,18 @@ public class LoanCalculator {
         double futureValueFactor = Math.pow(1 + monthlyInterest, numberOfRepayments);
 
         return (principle * monthlyInterest * futureValueFactor) / (futureValueFactor - 1);
+    }
+
+    public double calculateBalance(int numberOfPaymentsMade){
+        short numberOfRepayments= (short)(years*MONTHS_IN_A_YEAR);
+        float monthlyInterest= annualInterestRate/PERCENT/MONTHS_IN_A_YEAR;
+        double futureValueFactor= Math.pow(1+monthlyInterest,numberOfRepayments);
+
+        return principle*(futureValueFactor- Math.pow(1+monthlyInterest,numberOfPaymentsMade))/(futureValueFactor-1);
+    }
+
+    public short getYears(){
+        return years;
     }
 }
 

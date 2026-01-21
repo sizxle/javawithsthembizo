@@ -4,34 +4,26 @@ import java.text.NumberFormat;
 
 public class LoanReport {
 
-    private double principle;
-    private short years;
-    private float annualInterestRate;
+    private LoanCalculator loanCalculator;
+    private final NumberFormat currency = NumberFormat.getCurrencyInstance();
 
-    private final static byte MONTHS_IN_A_YEAR = 12;
-    private final static byte PERCENT = 100;
-
-    public LoanReport(double principle, short years, float annualInterestRate) {
-        this.principle = principle;
-        this.years = years;
-        this.annualInterestRate = annualInterestRate;
+    public LoanReport(LoanCalculator loanCalculator) {
+        this.loanCalculator = loanCalculator;
     }
 
-    public double calculateBalance(int numberOfPaymentsMade){
-        short numberOfRepayments= (short)(years*MONTHS_IN_A_YEAR);
-        float monthlyInterest= annualInterestRate/PERCENT/MONTHS_IN_A_YEAR;
-        double futureValueFactor= Math.pow(1+monthlyInterest,numberOfRepayments);
-
-        return principle*(futureValueFactor- Math.pow(1+monthlyInterest,numberOfPaymentsMade))/(futureValueFactor-1);
+    public void printMonthlyPayments(){
+        var monthlyPayment = loanCalculator.calculateMonthlyPayments();
+        System.out.println("LOAN CALCULATOR");
+        System.out.println("_______________");
+        System.out.println("Repayment: "+ currency.format(monthlyPayment));
     }
 
     public void printStatement(){
-        NumberFormat currency = NumberFormat.getCurrencyInstance();
         System.out.println();
         System.out.println("PAYMENT SCHEDULE");
         System.out.println("________________");
-        for (int month = 1; month <=years*MONTHS_IN_A_YEAR; month++) {
-            double balance =calculateBalance(month);
+        for (int month = 1; month <=loanCalculator.getYears()*LoanCalculator.MONTHS_IN_A_YEAR; month++) {
+            double balance =loanCalculator.calculateBalance(month);
             System.out.println(currency.format(balance));
         }
     }

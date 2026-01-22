@@ -4,6 +4,10 @@ public class UIControl {
 
     private boolean isEnabled = true;
 
+    public UIControl() {
+        System.out.println("UIControl constructor");
+    }
+
     public void enable(){
         isEnabled=true;
     }

@@ -1,16 +1,14 @@
 package com.javawithsthembizo.polymorphism;
 
-public class UIControl {
+public abstract class UIControl {
 
     private boolean isEnabled = true;
 
     public UIControl() {
         System.out.println("UIControl constructor");
-    }
+    }// this constructor still gets called
 
-    public void render(){
-        System.out.println("....");
-    }
+    public abstract void render(); // will force subclasses to implement this method
 
     public void enable(){
         isEnabled=true;

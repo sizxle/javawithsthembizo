@@ -11,4 +11,9 @@ public class TextBox {
     public void clear(){
         this.text="";
     }
+
+    @Override
+    public String toString() {
+        return text;
+    }
 }

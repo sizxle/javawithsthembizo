@@ -3,14 +3,14 @@ package com.javawithsthembizo.interfaces;
 public class TaxReport {
 
     // Tax report is tightly coupled tu tax Calculator
-    private TaxCalculator2026 taxCalculator;
+    private TaxCalculator calculator;
 
-    public TaxReport() {
-        this.taxCalculator =  new TaxCalculator2026(100_000);
+    public TaxReport(TaxCalculator calculator) {
+        this.calculator =  calculator;
     }
 
     public void show(){
-        var tax = taxCalculator.calculateTax();
+        var tax = calculator.calculateTax();
         System.out.println(tax);
     }
 }

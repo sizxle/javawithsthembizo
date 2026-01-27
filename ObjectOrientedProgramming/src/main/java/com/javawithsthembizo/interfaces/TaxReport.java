@@ -3,10 +3,10 @@ package com.javawithsthembizo.interfaces;
 public class TaxReport {
 
     // Tax report is tightly coupled tu tax Calculator
-    private TaxCalculator taxCalculator;
+    private TaxCalculator2026 taxCalculator;
 
     public TaxReport() {
-        this.taxCalculator =  new TaxCalculator(100_000);
+        this.taxCalculator =  new TaxCalculator2026(100_000);
     }
 
     public void show(){
